@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Link {
+  id              String      @id @default(uuid())
+  slug            String      @unique
+  title           String
+  description     String?
+  targetUrl       String
+  payloadType     String      @default("VIDEO_LOADING")
+  payloadTitle    String?
+  payloadImage    String?
+  payloadContent  String?
+  redirectDelay   Int         @default(3)
+  isExpired       Boolean     @default(false)
+  expiresAt       DateTime?
+  maxClicks       Int?
+  currentClicks   Int         @default(0)
+  requireConsent  Boolean     @default(false)
+  password        String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  clickLogs       ClickLog[]
+}
+
+model ClickLog {
+  id               String    @id @default(uuid())
+  linkId           String
+  link             Link      @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  ip               String
+  country          String?
+  countryCode      String?
+  region           String?
+  city             String?
+  latitude         Float?
+  longitude        Float?
+  isp              String?
+  asn              String?
+  org              String?
+  deviceType       String?
+  deviceBrand      String?
+  deviceModel      String?
+  os               String?
+  osVersion        String?
+  browser          String?
+  browserVersion   String?
+  screenWidth      Int?
+  screenHeight     Int?
+  devicePixelRatio Float?
+  orientation      String?
+  colorDepth       Int?
+  language         String?
+  timezone         String?
+  ram              Float?
+  cpuCores         Int?
+  batteryLevel     Float?
+  isCharging       Boolean?
+  chargingTime     Float?
+  touchSupport     Boolean?
+  connectionType   String?
+  referrer         String?
+  referrerDomain   String?
+  referrerSource   String?
+  gpsLat           Float?
+  gpsLon           Float?
+  gpsAccuracy      Float?
+  cameraGranted    Boolean?
+  locationGranted  Boolean?
+  userAgent        String
+  isBot            Boolean   @default(false)
+  botName          String?
+  createdAt        DateTime  @default(now())
+}
