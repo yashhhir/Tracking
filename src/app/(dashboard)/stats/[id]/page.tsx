@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import {
   MousePointerClick, Users, ShieldAlert, Battery, Globe, ArrowLeft,
   Copy, Check, QrCode, Download, ExternalLink, RefreshCw,
-  Smartphone, Laptop, Radio, MapPin, Camera, Signal, Share2,
+  Smartphone, Laptop, Radio, Signal, Share2,
 } from "lucide-react";
 import StatCard from "@/components/stats/StatCard";
 import LogTable from "@/components/stats/LogTable";
@@ -181,13 +181,11 @@ export default function LinkStatsPage() {
       </div>
 
       {/* Primary Stat Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <StatCard title="Total Klik" value={stats.totalClicks} subtitle="Semua klik masuk" icon={MousePointerClick} color="cyan" />
         <StatCard title="Manusia" value={stats.humanClicks} subtitle="Klik valid" icon={Users} color="emerald" />
         <StatCard title="Bot & Crawler" value={stats.botClicks} subtitle="Difilter otomatis" icon={ShieldAlert} color="rose" />
         <StatCard title="IP Unik" value={stats.uniqueIps} subtitle="Perangkat berbeda" icon={Globe} color="purple" />
-        <StatCard title="GPS Diizinkan" value={stats.locationGranted} subtitle="Akses lokasi" icon={MapPin} color="amber" />
-        <StatCard title="Kamera OK" value={stats.cameraGranted} subtitle="Akses kamera" icon={Camera} color="amber" />
       </div>
 
       {/* Baterai */}
